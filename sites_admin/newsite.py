@@ -1,4 +1,9 @@
+#! /usr/bin/python3
+
+# Install
 # sudo pip3 install validators
+
+#
 # sudo python3 newsite.py {domain.name} pimcore
 
 import sys
@@ -7,7 +12,7 @@ import os
 import subprocess
 
 # Read valid domain name from args
-domain = sys.argv[1]
+domain = sys.argv[1]  # set domain name
 option = sys.argv[2]  # set "pimcore" to create pimcore webroot
 
 if validators.domain(domain):
