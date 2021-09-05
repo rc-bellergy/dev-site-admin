@@ -1,10 +1,13 @@
 #! /usr/bin/python3
 
+# Sample to craete a standard site:
+# sudo python3 newsite.py {domain.dev.dq.hk}
+
+# Sample to create a Pimcore site:
+# sudo python3 newsite.py {domain.dev.dq.hk} pimcore
+
 # Install
 # sudo pip3 install validators
-
-#
-# sudo python3 newsite.py {domain.name} pimcore
 
 import sys
 import validators
@@ -13,7 +16,10 @@ import subprocess
 
 # Read valid domain name from args
 domain = sys.argv[1]  # set domain name
-option = sys.argv[2]  # set "pimcore" to create pimcore webroot
+if len(sys.argv) == 2:
+    option = sys.argv[2]  # set "pimcore" to create pimcore webroot
+else:
+    option = ""
 
 if validators.domain(domain):
     print("Creating site:", domain)
