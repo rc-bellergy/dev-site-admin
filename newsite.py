@@ -6,6 +6,9 @@
 # Sample to create a Pimcore site:
 # sudo python3 newsite.py {domain.dev.dq.hk} pimcore
 
+# Sample to create a php5 site:
+# sudo python3 newsite.py {domain.dev.dq.hk} php5
+
 # Install
 # sudo pip3 install validators
 
@@ -28,7 +31,7 @@ else:
 
 # Craete site directories
 try:
-    webroot = "/public_html"
+    webroot = "public_html"
     if option == "pimcore":
         webroot = webroot + "/web"
     directory = "/var/www/" + domain + webroot
@@ -38,7 +41,13 @@ except FileExistsError:
     print("Directory ", directory, " already exists")
 
 # Craete site config to apache sites-avablable folder
-fin = open("default.conf", "r")
+if option == "php5":
+    fin = open("php5.conf", "r")
+    print("Config php5 website")
+else:
+    fin = open("default.conf", "r")
+    print("Config default website")
+
 conf_file = "/etc/apache2/sites-available/"+domain+".conf"
 if os.path.isfile(conf_file):
     raise Exception("The config file already exist", conf_file)
@@ -105,7 +114,7 @@ try:
     print("Apache sites config test")
     subprocess.run(["/usr/sbin/apachectl", "configtest"])
 except:
-    print("Apache sites config test")
+    print("Apache sites config test error")
 
 # Restart Apache
 print("Restart Apache")
