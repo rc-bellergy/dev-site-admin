@@ -94,9 +94,10 @@ except FileExistsError:
 
 # set file permission
 webroot = "/var/www/" + domain + "/public_html"
+user = os.getlogin()
 try:
-    print("Set owner lion")
-    subprocess.call(['chown', '-R', "lion", webroot])
+    print("Set owner " + user)
+    subprocess.call(['chown', '-R', user, webroot])
 except:
     print("Set owner error")
     sys.exit(1)
