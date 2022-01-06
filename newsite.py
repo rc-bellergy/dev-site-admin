@@ -39,6 +39,7 @@ try:
     print("Create directory", directory)
 except FileExistsError:
     print("Directory ", directory, " already exists")
+    sys.exit(1)
 
 # Craete site config to apache sites-avablable folder
 if option == "php5":
@@ -71,6 +72,7 @@ try:
     print("Create directory", directory)
 except FileExistsError:
     print("Directory ", directory, " already exists")
+    sys.exit(1)
 
 # Craete index.html
 index_file = directory + "/index.html"
@@ -88,6 +90,8 @@ try:
     print("Create directory", directory)
 except FileExistsError:
     print("Directory ", directory, " already exists")
+    sys.exit(1)
+
 # set file permission
 webroot = "/var/www/" + domain + "/public_html"
 try:
@@ -95,11 +99,14 @@ try:
     subprocess.call(['chown', '-R', "lion", webroot])
 except:
     print("Set owner error")
+    sys.exit(1)
+
 try:
     print("Set file permission")
     subprocess.call(['chmod', '-R', "775", webroot])
 except:
     print("Set permission error")
+    sys.exit(1)
 
 # Update Apache
 # Enable the new site
@@ -108,13 +115,15 @@ try:
     subprocess.run(["a2ensite", domain + ".conf"])
 except:
     print("Apache site enable error")
+    sys.exit(1)
 
-# Test config
+# Test config and restart the Apache
 try:
     print("Apache sites config test")
     subprocess.run(["/usr/sbin/apachectl", "configtest"])
 except:
     print("Apache sites config test error")
+    sys.exit(1)
 
 # Restart Apache
 print("Restart Apache")
