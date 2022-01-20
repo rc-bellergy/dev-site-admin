@@ -34,7 +34,7 @@ try:
     webroot = "public_html"
     if option == "pimcore":
         webroot = webroot + "/web"
-    directory = "/var/www/" + domain + webroot
+    directory = "/var/www/" + domain + '/' + webroot
     os.makedirs(directory)
     print("Create directory", directory)
 except FileExistsError:
