@@ -9,5 +9,9 @@ Create a new site to Apache
 ### Create general site
     sudo python3 newsite.py {domain.name}
 
-### Create Pimcoew site
+### Create Pimcore6 site
     sudo python3 newsite.py {domain.name} pimcore
+
+
+### Create PimcoreX site
+    sudo python3 newsite.py {domain.name} pimcorex
