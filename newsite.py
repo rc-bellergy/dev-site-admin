@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
 # Sample to craete a standard site:
-# sudo python3 newsite.py {domain.dev.dq.hk}
+# sudo python3 newsite.py {domain.dev.dq.hk} default
 
 # Sample to create a Pimcore (6) site:
 # sudo python3 newsite.py {domain.dev.dq.hk} pimcore
@@ -22,13 +22,12 @@ import subprocess
 
 # Read valid domain name from args
 domain = sys.argv[1]  # set domain name
-if len(sys.argv) == 2:
-    option = sys.argv[2]  # set website options: php5 | pimcore | pimcorex
-else:
-    option = ""
+option = sys.argv[2]  # set website options: php5 | pimcore | pimcorex
 
 if validators.domain(domain):
     print("Creating site:", domain)
+    print("Website type:", option)
+
 else:
     raise Exception("Wrong domain name", domain)
 
